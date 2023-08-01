@@ -1,0 +1,389 @@
+{
+	"info": {
+		"_postman_id": "51176a5b-35a4-4008-8357-4fbe06ab6622",
+		"name": "Naturals",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20917037",
+		"_collection_link": "https://solar-meteor-988931.postman.co/workspace/Practice~df1724a5-616d-40c3-87e7-0ad142cda5ee/collection/20917037-51176a5b-35a4-4008-8357-4fbe06ab6622?action=share&creator=20917037&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Get Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4020/api/products/getproducts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4020",
+							"path": [
+								"api",
+								"products",
+								"getproducts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Products",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"product_name\": \"Calm Shampoo\",\r\n  \"stock\": 10,\r\n  \"categories\": \"Products\",\r\n  \"price\": 29.99,\r\n  \"regular_price\": 26.99,\r\n  \"sale_price\": 22.99\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4020/api/products/addnewproducts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4020",
+							"path": [
+								"api",
+								"products",
+								"addnewproducts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Products",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \r\n  \"product_name\": \"Calm Shampoo\",\r\n  \"stock\": 30,\r\n  \"categories\": \"Products\",\r\n  \"price\": 39.99,\r\n  \"regular_price\": 44.99,\r\n  \"sale_price\": 32.99\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4020/api/products/editproductlist/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4020",
+							"path": [
+								"api",
+								"products",
+								"editproductlist",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "Get Customers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4020/api/customer/getcustomer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4020",
+							"path": [
+								"api",
+								"customer",
+								"getcustomer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Customer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"status\": \"Active\",\r\n  \"first_name\": \"Chander\",\r\n  \"last_name\": \"Murali\",\r\n  \"email\": \"chandher@gamil.com\",\r\n  \"payment_method\": \"Cash\",\r\n  \"date_created\": \"2023-08-01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4020/api/customer/addnewcustomer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4020",
+							"path": [
+								"api",
+								"customer",
+								"addnewcustomer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Customer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \r\n  \"status\": \"Inactive\",\r\n  \"first_name\": \"varun\",\r\n  \"last_name\": \"Kavi\",\r\n  \"email\": \"varun@gmail.com\",\r\n  \"payment_method\": \"PayPal\",\r\n  \"date_created\": \"2023-08-02\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4020/api/customer/editcustomer/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4020",
+							"path": [
+								"api",
+								"customer",
+								"editcustomer",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Customer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4020/api/customer/deletefromcustomerlist/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4020",
+							"path": [
+								"api",
+								"customer",
+								"deletefromcustomerlist",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Get Order List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4020/api/order/getorder",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4020",
+							"path": [
+								"api",
+								"order",
+								"getorder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Order List",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"status\": \"Active\",\r\n  \"order_number\": \"Or-2\",\r\n  \"customer_name\": \"Rani\",\r\n  \"billing_address\": \"Covai\",\r\n  \"date_created\": \"2023-08-02\",\r\n  \"payment_method\": \"Paypal\",\r\n  \"total\": 9.99\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4020/api/order/addneworder",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4020",
+							"path": [
+								"api",
+								"order",
+								"addneworder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Order List",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n  {\r\n  \"status\": \"Active\",\r\n  \"order_number\": \"Or-1\",\r\n  \"customer_name\": \"Rani MAni\",\r\n  \"billing_address\": \"Covai\",\r\n  \"date_created\": \"2023-08-02\",\r\n  \"payment_method\": \"Paypal\",\r\n  \"total\": 9.99\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4020/api/order/editorder/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4020",
+							"path": [
+								"api",
+								"order",
+								"editorder",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Order List",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4020/api/order/deletefromorderlist/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4020",
+							"path": [
+								"api",
+								"order",
+								"deletefromorderlist",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "POS",
+			"item": [
+				{
+					"name": "Get Pos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4020/api/pos/getPOS",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4020",
+							"path": [
+								"api",
+								"pos",
+								"getPOS"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add New Pos",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Pos",
+					"request": {
+						"method": "PUT",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Pos",
+					"request": {
+						"method": "DELETE",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete Products",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4020/api/products//deletefromproductlist/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4020",
+					"path": [
+						"api",
+						"products",
+						"",
+						"deletefromproductlist",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
