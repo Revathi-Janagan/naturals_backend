@@ -2,6 +2,7 @@ const connection = require("../helper/db");
 
 module.exports = {
   getOrderList: (req, res) => {
+    console.log("Inside get")
     connection.query("SELECT * FROM orderproduct", function (err, results) {
       if (err) {
         console.log(err);

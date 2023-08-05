@@ -18,16 +18,18 @@ module.exports = {
   addNewCustomer: (req, res) => {
     console.log("Inside Add Customer", req.body);
     const data = req.body;
-    const insertQuery = `INSERT INTO customer (status,first_name,last_name,email,payment_method,date_created) 
-    VALUES(?,?,?,?,?,?)`;
-    const values = [
-      data.status,
-      data.first_name,
-      data.last_name,
-      data.email,
-      data.payment_method,
-      data.date_created,
-    ];
+    const insertQuery = `INSERT INTO customer (status, first_name, last_name, email, billing_address, payment_method, date_created) 
+VALUES (?, ?, ?, ?, ?, ?, ?)`;
+
+const values = [
+  data.status,
+  data.first_name,
+  data.last_name,
+  data.email,
+  data.billing_address,
+  data.payment_method,
+  data.date_created,
+];
     connection.query(insertQuery, values, (err, results) => {
       if (err) {
         console.error("Error while executing the INSERT query:", err);
@@ -48,7 +50,7 @@ module.exports = {
     const data = req.body;
   
     const updateQuery = `UPDATE customer
-                         SET status = ?, first_name = ?, last_name = ?, email = ?, payment_method = ?, date_created = ?
+                         SET status = ?, first_name = ?, last_name = ?, email = ?, billing_address = ?,payment_method = ?, date_created = ?
                          WHERE customer_id = ?`;
   
     const values = [
@@ -56,6 +58,7 @@ module.exports = {
       data.first_name,
       data.last_name,
       data.email,
+      data.billing_address,
       data.payment_method,
       data.date_created,
       customerId, // Use the extracted customerId here
@@ -78,8 +81,8 @@ module.exports = {
   
 
   deleteCustomer: (req, res) => {
-    console.log("Inside Delete Customer", req.params); // Log the request parameters
-    const customerId = req.params.id; // Extract customerId from the URL parameters
+    console.log("Inside Delete Customer", req.params); 
+    const customerId = req.params.id; 
   
     const deleteQuery = `DELETE FROM customer WHERE customer_id = ?`;
   

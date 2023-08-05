@@ -50,7 +50,7 @@ module.exports = {
     console.log("Inside Editing", req.body);
     const data = req.body;
 
-    const updateQuery = `UPDATE products SET product_name = ?,stock = ?,categories = ?,price = ?,regular_price = ?,sale_price = ?WHERE id = ?`;
+    const updateQuery = `UPDATE products SET product_name = ?,stock = ?,categories = ?,price = ?,regular_price = ?,sale_price = ? WHERE id = ?`;
     const values = [
       data.product_name,
       data.stock,

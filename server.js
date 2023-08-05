@@ -9,13 +9,15 @@ const cors = require("cors");
 
 
 app.use(express.json());
+app.use(cors({origin:"http://localhost:3000",methods:"*"}));
 app.use("/api",routes);
-app.use(cors());
+
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 console.log(process.env.PORT);
 const PORT = process.env.PORT 
 
-app.listen(4020, (req, res) => {
+app.listen(PORT, (req, res) => {
   console.log(`Server is running on Port ${PORT}`);
 });
