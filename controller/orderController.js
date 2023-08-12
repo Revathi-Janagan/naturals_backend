@@ -2,7 +2,7 @@ const connection = require("../helper/db");
 
 module.exports = {
   getOrderList: (req, res) => {
-    console.log("Inside get")
+    console.log("Inside get");
     connection.query("SELECT * FROM orderproduct", function (err, results) {
       if (err) {
         console.log(err);
@@ -46,8 +46,8 @@ VALUES (?, ?, ?, ?, ?, ?, ?)`;
     });
   },
   editOrder: (req, res) => {
-    console.log("Inside Edit Order", req.params); 
-    const orderId = req.params.id; 
+    console.log("Inside Edit Order", req.params);
+    const orderId = req.params.id;
     const data = req.body;
 
     const updateQuery = `UPDATE orderproduct
@@ -68,13 +68,17 @@ VALUES (?, ?, ?, ?, ?, ?, ?)`;
     connection.query(updateQuery, values, (err, results) => {
       if (err) {
         console.error("Error while executing the UPDATE query:", err);
-        res.status(500).send({ error: "Error while updating data in the database." });
+        res
+          .status(500)
+          .send({ error: "Error while updating data in the database." });
       } else {
         if (results.affectedRows === 0) {
           res.status(404).send({ message: "Order not found." });
         } else {
           console.log("Data updated successfully!");
-          res.status(200).send({ message: "Data updated successfully!", data: results });
+          res
+            .status(200)
+            .send({ message: "Data updated successfully!", data: results });
         }
       }
     });
