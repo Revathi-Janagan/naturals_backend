@@ -1,94 +1,52 @@
-const connection = require("../helper/db");
+const nodemailer = require("nodemailer");
+const { GMAIL_PASSWORD, GMAIL_USERNAME } = require("../config/config");
 
 module.exports = {
-  getPOS: (req, res) => {
-    connection.query("SELECT * FROM POS", function (err, results) {
-      if (err) {
-        console.log(err);
-        return res
-          .status(400)
-          .send({ message: "Error While Getting Data", data: err });
-      }
-      return res.send({
-        message: "Successfully Retrieved the Customer",
-        data: results,
-      });
-    });
-  },
-  addNewPOS: (req, res) => {
-    console.log("Inside Add POS ", req.body);
+  sendMailController: async (req, res) => {
+    console.log("inside mail controller");
     const data = req.body;
-    const insertQuery = `INSERT INTO POS (pos_product, pos_price) 
-                         VALUES (?, ?)`;
-    const values = [
-      data.pos_product,
-      data.pos_price,
-    ];
-    connection.query(insertQuery, values, (err, results) => {
-      if (err) {
-        console.error("Error while executing the INSERT query:", err);
-        res
-          .status(500)
-          .send({ error: "Error while inserting data into the database." });
-      } else {
-        console.log("Data inserted successfully!");
-        res
-          .status(200)
-          .send({ message: "Data inserted successfully!", data: results });
-      }
-    });
-  },
-  
-  editPOS: (req, res) => {
-    console.log("Inside Edit POS", req.params); // Log the request parameters
-    const POSId = req.params.id; // Extract customerId from the URL parameters
-    const data = req.body;
-  
-    const updateQuery = `UPDATE POS
-                         SET pos_product = ?, pos_price = ?
-                         WHERE pos_id = ?`;
-  
-    const values = [
-      data.pos_product,
-      data.pos_price,
-     
-      POSId, // Use the extracted customerId here
-    ];
-  
-    connection.query(updateQuery, values, (err, results) => {
-      if (err) {
-        console.error("Error while executing the UPDATE query:", err);
-        res.status(500).send({ error: "Error while updating data in the database." });
-      } else {
-        if (results.affectedRows === 0) {
-          res.status(404).send({ message: "POS Details not found." });
-        } else {
-          console.log("Data updated successfully!");
-          res.status(200).send({ message: "Data updated successfully!", data: results });
-        }
-      }
-    });
-  },
-  
 
-  deletePOS: (req, res) => {
-    console.log("Inside Delete POS", req.params); // Log the request parameters
-    const POSId = req.params.id; 
-  
-    const deleteQuery = `DELETE FROM POS WHERE pos_id = ?`;
-  
-    connection.query(deleteQuery, [POSId], (err, results) => {
-      if (err) {
-        console.error("Error while executing the DELETE query:", err);
-        res.status(500).send({ error: "Error while deleting data from the database." });
-      } else {
-        if (results.affectedRows === 0) {
-          res.status(404).send({ message: "POS Details not found." });
-        } else {
-          console.log("Data deleted successfully!");
-          res.status(200).send({ message: "Data deleted successfully!" });
-        }
-      }
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: GMAIL_USERNAME,
+        pass: GMAIL_PASSWORD,
+      },
     });
-},
+
+    let html = `<html>
+      <body>
+      <h2>${data?.name}</h2>
+      <p>Thank you for Purchasing Products</p>
+      <p>Regards</p>
+      <p>Product Services</p>
+      </body>
+      </html>`;
+
+    // Convert the Base64 PDF data to binary buffer
+    const pdfAttachment = Buffer.from(data?.pdfBase64.split("base64,")[1], "base64");
+
+    let message = {
+      from: "srevathisona@gmail.com",
+      to: data?.email,
+      subject: "Product Subject Info!",
+      html: html,
+      attachments: [
+        {
+          filename: "order.pdf",
+          content: pdfAttachment, // Use the binary buffer here
+          contentType: "application/pdf", // Set the correct content type
+        },
+      ],
+    };
+
+    try {
+      const info = await transporter.sendMail(message);
+      console.log(info);
+      return res.json({ message: "Successfully Sent the Mail!!!" });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ message: "Error while Sending Mail" });
+    }
+  },
 };
