@@ -23,7 +23,7 @@ module.exports = {
       </body>
       </html>`;
 
-    // Convert the Base64 PDF data to binary buffer
+   
     const pdfAttachment = Buffer.from(data?.pdfBase64.split("base64,")[1], "base64");
 
     let message = {
@@ -34,8 +34,8 @@ module.exports = {
       attachments: [
         {
           filename: "order.pdf",
-          content: pdfAttachment, // Use the binary buffer here
-          contentType: "application/pdf", // Set the correct content type
+          content: pdfAttachment, 
+          contentType: "application/pdf", 
         },
       ],
     };
